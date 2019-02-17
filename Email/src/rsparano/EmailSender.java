@@ -25,9 +25,9 @@ import javax.mail.internet.MimeMultipart;
 public class EmailSender{
 
     public static void main(String args[]) {
-        String to = "Roseanne.Sparano@oracle.com";            // sender email
-        String from = "Roseanne.sparano@oracle.com";       // receiver email
-        String host = "internal-mail-router.oracle.com";    // mail server host
+        String to = "Roseanne.Sparano@example.com";            // sender email
+        String from = "Roseanne.sparano@example.com";       // receiver email
+        String host = "internal-mail.com";    // mail server host
 
        Properties properties = System.getProperties();
        properties.setProperty("mail.smtp.host", host);
@@ -38,13 +38,13 @@ public class EmailSender{
             MimeMessage message = new MimeMessage(session);        // email message
             message.setFrom(new InternetAddress(from));                    // setting header fields
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-            message.setSubject("System Information from rsparano-us"); // subject line
+            message.setSubject("System Information from hostname"); // subject line
          
             // Create the message part
             BodyPart messageBodyPart = new MimeBodyPart();
             
             // Now set the actual message
-            messageBodyPart.setText("Here is the latest System information from rsparano-us.");
+            messageBodyPart.setText("Here is the latest System information from hostname.");
             
             // actual mail body
             //message.setText("You can send mail from Java program by using mail API, but you need"
@@ -59,7 +59,7 @@ public class EmailSender{
             
             // Part two is attachment
             messageBodyPart = new MimeBodyPart();
-            String filename = "C:\\Users\\rsparano\\scripts\\SysINfo\\slc10yvl_SysOutput.txt";
+            String filename = "C:\\Users\\scripts\\SysINfo\\hostname_SysOutput.txt";
             DataSource source = new FileDataSource(filename);
             messageBodyPart.setDataHandler(new DataHandler(source));
             messageBodyPart.setFileName(filename);
